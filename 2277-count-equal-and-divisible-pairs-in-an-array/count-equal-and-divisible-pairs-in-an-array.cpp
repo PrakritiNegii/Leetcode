@@ -1,17 +1,13 @@
 class Solution {
 public:
     int countPairs(vector<int>& nums, int k) {
-        int c=0;
-        for(int i=0; i<nums.size(); i++)
+        int c=0, n=nums.size();
+        for(int i=0; i<n; i++)
          {
-          for(int j=nums.size()-1; j>i; j--)
+          for(int j=n-1; j>i; j--)
            {
-            int product = i*j;
-            if(product%k==0)
-             {
-              if(nums[i]==nums[j]) 
+            if((i*j)%k==0 && (nums[i]==nums[j]))
                 c++;
-             }
            }
          }
         return c;
