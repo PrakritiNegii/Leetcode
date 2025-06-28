@@ -1,19 +1,16 @@
-
 class Solution {
 public:
-   unsigned long long climbStairs(int n) {
+      int climbStairs(int n) {
+        vector<int> dp(n+1,-1);
+        dp[0] = 0;
+        return calculate(n,dp);
+    }
+      int calculate(int n, vector<int>&dp)
+     {
         if(n==1) return 1;
         if(n==2) return 2;
-
-       unsigned long long a = 1;
-       unsigned long long b = 2;
-     unsigned long long c ;
-        while(n!=2)
-         {
-          c = a+ b;
-          a =b ;
-          b = c;
-          n--;
-         }
-        return c;
-    }};
+        if(dp[n]==-1)
+          return dp[n] = calculate(n-1,dp) + calculate(n-2,dp);   
+        return dp[n];
+     }
+};
