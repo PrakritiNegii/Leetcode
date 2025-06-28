@@ -1,16 +1,22 @@
+
+	
+	
 class Solution {
 public:
-      int climbStairs(int n) {
-        vector<int> dp(n+1,-1);
-        dp[0] = 0;
-        return calculate(n,dp);
-    }
-      int calculate(int n, vector<int>&dp)
-     {
+   int climbStairs(int n) {
         if(n==1) return 1;
         if(n==2) return 2;
-        if(dp[n]==-1)
-          return dp[n] = calculate(n-1,dp) + calculate(n-2,dp);   
-        return dp[n];
-     }
-};
+
+       int a = 1;
+       int b = 2;
+       int c ;
+        while(n!=2)
+         {
+          c = a+ b;
+          a = b ;
+          b = c;
+          n--;
+         }
+        return c;
+    }
+    };
