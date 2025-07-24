@@ -2,27 +2,20 @@ class Solution {
 public:
     vector<vector<int>> subsets(vector<int>& nums) {
         vector<vector<int>> res;
-        res.push_back({});
-        generate(nums,res,{},0,0);
-        res.push_back(nums);
+        generate(nums,res,{},0);
         return res;
     }
-
-    void generate(vector<int>& nums, vector<vector<int>>& res, vector<int> vec, int len, int pos) //pos is vector vec's last element's position in nums +1
+//O(N*2^N)
+    void generate(vector<int>& nums, vector<vector<int>>& res, vector<int> vec, int len) 
      {
-      if(len==nums.size()-1)
-        return;
-      for(int i=pos; i<nums.size(); i++)
+      if(len==nums.size())
        {
-        vec.push_back(nums[i]);
         res.push_back(vec);
-        vec.pop_back();
+        return;
        }
-      for(int i=pos; i<nums.size(); i++)
-       {
-        vec.push_back(nums[i]);
-        generate(nums,res,vec,len+1,i+1);
-        vec.pop_back();
-       }
+      vec.push_back(nums[len]);
+      generate(nums,res,vec,len+1);
+      vec.pop_back();
+      generate(nums,res,vec,len+1);
      }
 };
