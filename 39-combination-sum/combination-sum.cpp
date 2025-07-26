@@ -1,6 +1,6 @@
 class Solution {
 public:
-    void generate(vector<int>& candidates, int target, vector<vector<int>>&res, vector<int> vec, int i, int sum)
+    void generate(vector<int>& candidates, int target, vector<vector<int>>&res, vector<int> &vec, int i, int sum)
      {
       if(sum>=target || i>=candidates.size())
        {
@@ -16,7 +16,8 @@ public:
     vector<vector<int>> combinationSum(vector<int>& candidates, int target) 
      {
       vector<vector<int>> res;
-      generate(candidates,target,res,{},0,0);
+      vector<int> vec;
+      generate(candidates,target,res,vec,0,0);
       return res;
      }  
 };
