@@ -11,10 +11,6 @@ public:
     void generateSubsets(vector<int>& nums, vector<vector<int>>& ans, vector<int> vec, int i)
      {
       ans.push_back(vec);
-      if(i==nums.size())
-       {
-        return;
-       }
       for(int j=i; j<nums.size(); j++)
        {
         if(j>i && nums[j]==nums[j-1]) continue;
