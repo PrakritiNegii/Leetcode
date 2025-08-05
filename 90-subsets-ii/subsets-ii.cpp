@@ -2,7 +2,7 @@ class Solution {
 public:
     vector<vector<int>> subsetsWithDup(vector<int>& nums) {
         vector<vector<int>> ans;
-        vector<int> vec;
+        vector<int> vec = {};
         sort(nums.begin(),nums.end());
         generateSubsets(nums,ans,vec,0);
         return ans;
@@ -10,19 +10,17 @@ public:
 
     void generateSubsets(vector<int>& nums, vector<vector<int>>& ans, vector<int> vec, int i)
      {
+      ans.push_back(vec);
       if(i==nums.size())
        {
-        ans.push_back(vec);
         return;
        }
-      int x = nums[i];
-      vec.push_back(x);
-      generateSubsets(nums,ans,vec,i+1);
-      vec.pop_back();
-      while(i<nums.size() && nums[i]==x)
+      for(int j=i; j<nums.size(); j++)
        {
-        i++;
+        if(j>i && nums[j]==nums[j-1]) continue;
+        vec.push_back(nums[j]);
+        generateSubsets(nums,ans,vec,j+1);    
+        vec.pop_back();
        }
-     generateSubsets(nums,ans,vec,i);
      }
 };
