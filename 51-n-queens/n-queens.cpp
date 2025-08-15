@@ -1,60 +1,61 @@
 class Solution {
 public:
-    vector<vector<string>> solveNQueens(int n) {
-      string s = "";
-      for(int i=0; i<n; i++)
-        s+=".";
-      vector<string> vec(n,s);
-      vector<char> col(n,'0');
-      vector<vector<char>> visited (n, vector<char> (n,'0'));
-      vector<vector<string>> ans;
-      
-      traverse(ans, vec, n, 0, col, visited);
-      return ans;  
-    }
-
-    void traverse(vector<vector<string>>& ans, vector<string>& vec, int n, int r, vector<char>& col, vector<vector<char>> visited)
+    bool validPosition(vector<string> &board, int size, int r, int c)
      {
-      int size = vec.size();
-      if(n==0)
+      int i = r-1, j = c;
+      while(i>=0)
        {
-        ans.push_back(vec);
+        if(board[i][c]=='Q')
+           return false;
+        i--;
+       } 
+
+      i = r-1; j = c-1;
+      while(i>=0 && j>=0)
+       {
+        if(board[i][j]=='Q')
+           return false;
+        i--; j--;
+       }
+
+      i = r-1; j = c+1;
+      while(i>=0 && j<size)
+       {
+        if(board[i][j]=='Q')
+           return false;
+        i--; j++;
+       }
+
+      return true;
+     }
+
+    void traverse(vector<vector<string>>& ans, vector<string>& board, int r)
+     {
+      int size = board.size();
+      if(r==size)
+       {
+        ans.push_back(board);
         return;
        }
       // if(vec.size()==n) return;
       for(int i=0; i<size; i++) // r is the row
        {
-        if(col[i]=='1' || visited[r][i]=='1') continue;
-
-        vec[r][i] = 'Q';
-        col[i] = '1';
-
-        vector<vector<char>> copyVisited (size, vector<char> (size));
-        for(int x=0; x<size; x++)
-         {
-          for(int y=0; y<size; y++)
-           {
-            copyVisited[x][y] = visited[x][y];
-           }
-         }
-
-        int p = r+1, q = i+1;
-        while(p<size && q<size)
-         {
-          copyVisited[p++][q++] = '1';
-         }
-
-        p = r+1, q = i-1;
-        while(p<size && q>=0)
-         {
-          copyVisited[p++][q--] = '1';
-         }
-
-        cout<<endl;
-        traverse(ans, vec, n-1, r+1, col, copyVisited);
-        vec[r][i] = '.';
-        col[i] = '0';
-
+        board[r][i] = 'Q';
+        bool check = validPosition(board,size,r,i);
+        if(check==true)
+           traverse(ans,board,r+1);
+        board[r][i] = '.';
        }
      } 
+
+    vector<vector<string>> solveNQueens(int n) {
+      string s = "";
+      for(int i=0; i<n; i++)
+        s+=".";
+      vector<string> board(n,s);
+      vector<vector<string>> ans;
+      
+      traverse(ans, board, 0);
+      return ans;  
+    }
 };
