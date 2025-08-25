@@ -7,7 +7,7 @@ public:
      }
     bool solve(vector<vector<char>>&board, int r)
      {
-      for(int i=r; i<9; i++)
+      for(int i=0; i<9; i++)
        {
         for(int j=0; j<9; j++)
          {
