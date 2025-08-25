@@ -6,7 +6,6 @@ public:
      bool up = true;
      while(r<rsize && c<csize)
       {
-       cout<<r<<"    "<<c<<endl;
        res.push_back(mat[r][c]);
        if(up==true)
         {
