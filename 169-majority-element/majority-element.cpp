@@ -7,11 +7,15 @@ public:
          {
           hashmap[nums[i]]++;
          }
-        int max = INT_MIN;
-        for(int val : nums)
+        int max = INT_MIN, maxNo;
+        for(auto val : hashmap)
          {
-          if(hashmap[val]>hashmap[max]) max=val;
+          if(val.second > max) 
+           {
+            max = val.second;
+            maxNo = val.first;
+           }
          }
-        return max;
+        return maxNo;
     }
 };
