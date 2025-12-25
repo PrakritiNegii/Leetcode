@@ -2,34 +2,25 @@ class Solution {
 public:
     void sortColors(vector<int>& nums) {
         int n = nums.size();
-        //arranging zeroes to the start of the array
-
-        int j=n-1; 
-        while(j>=0 && nums[j]!=0)
+        int c0=0, c1=0, c2=0;
+        for(int i=0; i<n; i++)
          {
-          j--; //find first 0 from the last
+          if(nums[i]==0) c0++;
+          else if(nums[i]==1) c1++;
+               else c2++;
          }
-        for(int i=j-1; i>=0 && j>=0; i--) //i points to non zero element to be swapped
+        int i = 0;
+        for(; i<c0; i++)
          {
-          if(nums[i]!=0)
-           {
-            swap(nums[i],nums[j]);
-            j--;
-           }
+          nums[i] = 0;
          }
-
-        j = 0; 
-        while(j<n && nums[j]!=2)
+        for(; i<c0+c1; i++)
          {
-          j++; //find first 2 from the start
+          nums[i] = 1;
          }
-        for(int i=j+1; i<n; i++) //i points to non 2 element to be swapped
+        for(; i<c0+c1+c2; i++)
          {
-          if(nums[i]!=2)
-           {
-            swap(nums[i],nums[j]);
-            j++;
-           }
+          nums[i] = 2;
          }
     }
 };
