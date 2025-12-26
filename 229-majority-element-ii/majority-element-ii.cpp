@@ -1,22 +1,20 @@
 class Solution {
 public:
     vector<int> majorityElement(vector<int>& nums) {
-      sort(nums.begin(),nums.end());
       vector<int> ans;
       int n = nums.size();
+      int s = n/3;
 
-      if(n==1) return nums;
-      int s = (n/3)+1;  
-      int c = 1;
+      unordered_map <int,int> hashmap;
       for(int i=0; i<n; i++)
        {
-        if(i<n-1 && nums[i]==nums[i+1]) c++;
-          else
-             {
-              if(c>=s) 
-                ans.push_back(nums[i]);
-              c = 1;
-             }
+        int val = nums[i];
+        hashmap[val]++;
+       }
+      
+      for(auto el: hashmap)
+       {
+        if(el.second>s) ans.push_back(el.first);
        }
 
       return ans;
