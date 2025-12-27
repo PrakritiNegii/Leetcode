@@ -1,21 +1,18 @@
 class Solution {
 public:
     int majorityElement(vector<int>& nums) {
-        unordered_map <int,int> hashmap;
-        int n = nums.size();
-        for(int i=0; i<n; i++)
+      int el;
+      int c = 0;
+      int n = nums.size();
+      for(int i=0; i<n; i++)
+       {
+        if(c==0) 
          {
-          hashmap[nums[i]]++;
+          el = nums[i];
          }
-        int max = INT_MIN, maxNo;
-        for(auto val : hashmap)
-         {
-          if(val.second > max) 
-           {
-            max = val.second;
-            maxNo = val.first;
-           }
-         }
-        return maxNo;
+        if(nums[i]==el) c++;
+        else c--;
+       }
+      return el;
     }
 };
