@@ -13,66 +13,33 @@ public:
        }
       return true;
      }
+
+    void rotate90Degree(vector<vector<int>>& mat) {
+        int n = mat.size();
+
+        for(int i=0; i<n; i++) //Transpose matrix
+         {
+          for(int j=i+1; j<n; j++)
+           {
+            swap(mat[i][j],mat[j][i]);
+           }
+         }
+        for(int i=0; i<n; i++) //Reversing each row
+         {
+          reverse(mat[i].begin(),mat[i].end());
+         }     
+    }
+
     bool findRotation(vector<vector<int>>& mat, vector<vector<int>>& target) {
     //Rotate 0 degree (already equal) or 360 degree
     //check if equal
         if(isEqual(mat,target)) return true;
 
-        int n = mat.size();
-
-        //Rotate 90 degree clockwise once
-        for(int i=0; i<n; i++) //Transpose matrix
+        for(int i=1; i<=3; i++)
          {
-          for(int j=i+1; j<n; j++)
-           {
-            swap(mat[i][j],mat[j][i]);
-           }
+          rotate90Degree(mat);
+          if(isEqual(mat,target)) return true;
          }
-        for(int i=0; i<n; i++) //Reversing each row
-         {
-          reverse(mat[i].begin(),mat[i].end());
-         }
-    //check if equal
-        if(isEqual(mat,target)) return true;
-        
-    //Rotate 180 degree clockwise once
-        for(int i=0; i<n; i++) //Reversing each row
-         {
-          reverse(mat[i].begin(),mat[i].end());
-         }
-        for(int j=0; j<n; j++) //Reversing each column
-         {
-          int i=0, k=n-1;
-          while(i<k)
-           {
-            swap(mat[i][j],mat[k][j]);
-            i++;
-            k--;
-           }
-         }
-    //check if equal
-        if(isEqual(mat,target)) return true;
-
-        //Rotate 270 degree clockwise once (90 degree counter-clockwise)
-        for(int i=0; i<n; i++) //Transpose matrix
-         {
-          for(int j=i+1; j<n; j++)
-           {
-            swap(mat[i][j],mat[j][i]);
-           }
-         }
-        for(int j=0; j<n; j++) //Reversing each column
-         {
-          int i=0, k=n-1;
-          while(i<k)
-           {
-            swap(mat[i][j],mat[k][j]);
-            i++;
-            k--;
-           }
-         }
-    //check if equal
-        if(isEqual(mat,target)) return true;
 
         return false;
     }
