@@ -5,51 +5,36 @@ public:
         int n = matrix[0].size(); //number of columns
 
         vector<int> spiral;
-
-        int r = m-1, c = n-1;
-        int rs = 0, cs = 0; //rowStart and columnStart
-
-        while(rs<=r && cs<=c)
-        {
-          int i=rs, j=cs;
-          while(j<=c)
-           {
-            spiral.push_back(matrix[i][j]);
-            cout<<"1 "<<matrix[i][j]<<endl;
-            j++; 
-           }
-          j--; //j goes out of bound for the last increment of the loop
-          i++; //last element in row will only be checked once
-          while(i<=r)
-           {
-            spiral.push_back(matrix[i][j]);
-                        cout<<"2 "<<matrix[i][j]<<endl;
-
-            i++;
-           }
-          i--; //i goes out of bound for the last increment of the loop
-          j--; //last element in column to be checked only once
-          while(j>=cs && rs<r)
-           {
-            spiral.push_back(matrix[i][j]);
-                        cout<<"3 "<<matrix[i][j]<<endl;
-
-            j--;
-           }
-          j++; //j goes less than cs
-          i--; //last element in row (right to left traversal) to be checked only once
-          rs++;
-          while(i>=rs && cs<c)
-           {
-            spiral.push_back(matrix[i][j]);
-                        cout<<"4 "<<matrix[i][j]<<endl;
-
-            i--;
-           }
-          cs++;
-          c--; r--;
-          cout<<"Loop end "<<r<<" "<<c<<" "<<rs<<" "<<cs<<endl;
-        }
+        
+        int top=0, bottom=m-1;
+        int left=0, right=n-1;
+        while(top<=bottom && left<=right)
+          {
+            //left to right
+            for(int j=left; j<=right; j++)
+             {
+              spiral.push_back(matrix[top][j]);
+             }
+            //top to bottom
+            top++;
+            for(int i=top; i<=bottom; i++)
+             {
+              spiral.push_back(matrix[i][right]);
+             }
+            right--;
+            //right to left
+            for(int j=right; j>=left && top<=bottom; j--) //not executed when only 1 row left
+             {
+              spiral.push_back(matrix[bottom][j]);
+             }
+            bottom--;
+            //bottom to top
+            for(int i=bottom; i>=top && left<=right; i--) //not executed when only 1 col left
+             {
+              spiral.push_back(matrix[i][left]);
+             }
+            left++;
+          }
       return spiral;
     }
 };
