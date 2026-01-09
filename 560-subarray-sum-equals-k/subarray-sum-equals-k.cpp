@@ -1,21 +1,21 @@
 class Solution {
 public:
     int subarraySum(vector<int>& nums, int k) {
-        unordered_map<int, int> frequency;
-        frequency[0] = 1;   // IMPORTANT
-        //Assuming 0 has frequency 1 for cases where k is an element itself
+        map<int,int> frequency;
+        int n = nums.size();
+        
+        frequency[0]=1;
+        int c = 0;
+        int preSum = 0;
+        for(int i=0; i<n; i++)
+         {
+          preSum += nums[i];        
+          int remove = preSum-k;
 
-        int sum = 0;
-        int count = 0;
-
-        for (int x : nums) {
-            sum += x;
-
-            if (frequency.count(sum - k))
-                count += frequency[sum - k];
-
-            frequency[sum]++;
-        }
-        return count;
+          c = c + frequency[remove];
+        
+          frequency[preSum]++;
+         }        
+        return c;
     }
 };
