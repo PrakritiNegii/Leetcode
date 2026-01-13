@@ -1,25 +1,29 @@
 class Solution {
 public:
+    long long nCr(int n, int r)
+     {
+      long long ans = 1;
+      int divisorF = min(r,n-r);
+      int i=1;
+      while(i<=divisorF)
+       {
+        ans = (ans*n)/i;
+        i++; n--;
+       }
+      return ans;
+     }
+
     vector<vector<int>> generate(int numRows) {
-       vector<vector<int>> PascalTri; //Matrix with numRows
-
-       for(int i=0; i<numRows; i++)
-        {
-         vector<int> iRow(i+1);
-         iRow[0] = 1; //Firt element of the row is 1
-         iRow[i] = 1; //Last element of the row is 1
-         for(int j=1; j<i; j++)
-          {
-           iRow[j] = PascalTri[i-1][j] + PascalTri[i-1][j-1];
-          }
-         PascalTri.push_back(iRow);
-         for(int k=0; k<=i; k++)
-          {
-           cout<<PascalTri[i][k]<<" ";
-          }
-         cout<<endl;
-        } 
-
-      return PascalTri;
-    }
+        vector<vector<int>> PascalTri;
+        for(int i=0; i<numRows; i++)
+         {
+          vector<int> temp(i+1);
+          for(int j=0; j<=i; j++)
+           {
+            temp[j] = nCr(i,j);
+           }
+          PascalTri.push_back(temp);
+         }
+        return PascalTri;
+     }
 };
