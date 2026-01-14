@@ -1,37 +1,48 @@
 class Solution {
 public:
     vector<int> majorityElement(vector<int>& nums) {
-        int el1 = 0, el2 = 0, c1 = 0, c2 = 0;
+        int n = nums.size();
 
-        // Step 1: Find candidates
-        for (int x : nums) {
-            if (x == el1) c1++;
-            else if (x == el2) c2++;
-            else if (c1 == 0) {
-                el1 = x;
-                c1 = 1;
-            }
-            else if (c2 == 0) {
-                el2 = x;
-                c2 = 1;
-            }
-            else {
-                c1--;
-                c2--;
-            }
-        }
+        pair<int,int> majority;
+        pair<int,int> count;
 
-        // Step 2: Verify
-        c1 = c2 = 0;
-        for (int x : nums) {
-            if (x == el1) c1++;
-            else if (x == el2) c2++;
-        }
+        for(int i=0; i<n; i++)
+         {
+          if(nums[i]==majority.first)
+           {
+            count.first++;
+           }
+          else if(nums[i]==majority.second)
+                {
+                 count.second++;
+                }
+               else if(count.first==0) 
+                     {
+                      majority.first = nums[i];
+                      count.first = 1;
+                     }
+                    else if(count.second==0)
+                          {
+                           majority.second = nums[i];
+                           count.second = 1;
+                          }
+                         else
+                           {
+                            count.first--;
+                            count.second--;
+                           }
+         }
+        
+        count.first=0; count.second=0;
+        for(int i=0; i<n; i++)
+         {
+          if(majority.first==nums[i]) count.first++;
+          if(majority.second==nums[i]) count.second++;
+         }
 
         vector<int> ans;
-        int n = nums.size();
-        if (c1 > n / 3) ans.push_back(el1);
-        if (c2 > n / 3) ans.push_back(el2);
+        if(count.first>n/3) ans.push_back(majority.first);
+        if(count.second>n/3 && majority.first!=majority.second) ans.push_back(majority.second);
 
         return ans;
     }
