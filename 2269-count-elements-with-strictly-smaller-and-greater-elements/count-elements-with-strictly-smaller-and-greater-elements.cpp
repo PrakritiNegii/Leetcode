@@ -3,33 +3,21 @@ public:
     int countElements(vector<int>& nums) {
         int n = nums.size();
 
-        int minimum = nums[0];
-        int maximum = nums[0];
-        int minCount = 1;
-        int maxCount = 1;
+        int min = nums[0];
+        int max = nums[0];
 
         for(int i=1; i<n; i++)
          {
-          if(minimum>nums[i])
-           {
-            minimum = nums[i];
-            minCount = 1;
-           }
-          else if(minimum==nums[i])
-                 minCount++;
-
-          if(maximum<nums[i])
-           {
-            maximum = nums[i];
-            maxCount = 1;
-           }
-          else if(maximum==nums[i])
-                 maxCount++;
+          if(min>nums[i]) min = nums[i];
+          if(max<nums[i]) max = nums[i];
          }
 
-        int ans = n-minCount-maxCount;
+        int c=0;
+        for(int i=0; i<n; i++)
+         {
+          if(nums[i]>min && nums[i]<max) c++;
+         }
 
-        if(ans<0) return 0;
-        return ans;
+        return c;
     }
 };
