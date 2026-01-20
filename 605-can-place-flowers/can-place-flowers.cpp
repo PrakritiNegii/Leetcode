@@ -5,12 +5,6 @@ public:
 
       int size = flowerbed.size();
 
-      if(size==1)
-       {
-        if(flowerbed[0]==0) return true;
-        else return false;
-       }
-
       for(int i=0; i<size; i++)
        {
         if(!flowerbed[i] && (i==0 || !flowerbed[i-1]) && (i==size-1 || !flowerbed[i+1]))
