@@ -4,25 +4,39 @@ public:
         vector<vector<int>> ans;
         int n = intervals.size();        
         
-        sort(intervals.begin(),intervals.end());
-        for(int i=0; i<n;)
+        map<int,int> mp;
+        for(int i=0; i<n; i++)
          {
           int start = intervals[i][0];
           int end = intervals[i][1];
-
-          int j=i+1;
-          for(; j<n; j++)
-           {
-            if(end>=intervals[j][0])
-              end = max(end,intervals[j][1]);
-            else 
-              break;
-           }
-
-          ans.push_back({start,end});
-          i = j;
+          mp[start]++;
+          mp[end]--;
          }
 
+        int newInterval = 0;
+        bool st = true;
+        vector<int> temp;
+        for(auto val : mp)
+         {
+          if(newInterval==0 && val.second==0)
+           {
+            ans.push_back({val.first,val.first});
+            continue;
+           }
+          newInterval += val.second;
+          if(st==true) 
+           {
+            temp.push_back(val.first);
+            st = false;
+           }
+          else if(newInterval==0) 
+                {
+                 temp.push_back(val.first);
+                 ans.push_back(temp);
+                 temp.clear();
+                 st = true;
+                }
+         }
         return ans;
     }
 };
