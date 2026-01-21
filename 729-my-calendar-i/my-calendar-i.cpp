@@ -1,32 +1,32 @@
 class MyCalendar {
 public:
-    map<int,int> mp;
+    multiset<pair<int,int>> mst;
     MyCalendar() {
         
     }
     
     bool book(int startTime, int endTime) {
-        mp[startTime]++;
-        mp[endTime]--;
+        mst.insert({startTime,1});
+        mst.insert({endTime,-1});
+
         int booked = 0;
-        for(auto val : mp)
+        for(auto val : mst)
          {
           booked += val.second;
           if(booked>1) break;
          }
         
-        if(booked<=1) return true;
+        if(booked==0) return true;
 
-        auto it = mp.find(startTime);
-        if(it != mp.end()) {
-          mp[startTime]--;
-          if(mp[startTime]==0)
-            mp.erase(it);  // deletes only one element
+        auto it = mst.find({startTime,1});
+        if(it != mst.end()) {
+            mst.erase(it);  // deletes only one element
         }
 
-        mp[endTime]++;
-        if(mp[endTime] == 0) 
-          mp.erase(endTime);  // deletes only one element
+        it = mst.find({endTime,-1});
+        if(it != mst.end()) {
+            mst.erase(it);  // deletes only one element
+        }
     
         return false;
     }
