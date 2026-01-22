@@ -1,36 +1,24 @@
 class MyCalendarTwo {
 public:
-    map<int,int> mp;
-    MyCalendarTwo() {
-        
-    }
-    
-    bool book(int startTime, int endTime) {
-      mp[startTime]++;
-      mp[endTime]--;
+    vector<pair<int,int>> books;
+    vector<pair<int,int>> overlaps;
 
-      int booked = 0;
-      for(auto val : mp)
-       {
-        booked += val.second;
+    bool book(int start, int end) {
+        // check triple booking
+        for (auto &o : overlaps) {
+            if (max(o.first, start) < min(o.second, end))
+                return false;
+        }
 
-        if(booked>2) 
-         {
-          mp[startTime]--;
-          mp[endTime]++;
-          if(mp[startTime]==0) mp.erase(startTime);
-          if(mp[endTime]==0) mp.erase(endTime);
+        // record new double bookings
+        for (auto &b : books) {
+            int s = max(b.first, start);
+            int e = min(b.second, end);
+            if (s < e)
+                overlaps.push_back({s, e});
+        }
 
-          return false;
-         }
-       }
-
-      return true;
+        books.push_back({start, end});
+        return true;
     }
 };
-
-/**
- * Your MyCalendarTwo object will be instantiated and called as such:
- * MyCalendarTwo* obj = new MyCalendarTwo();
- * bool param_1 = obj->book(startTime,endTime);
- */
