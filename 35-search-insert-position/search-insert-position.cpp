@@ -1,18 +1,9 @@
 class Solution {
 public:
-    int searchInsert(vector<int>& nums, int target) {
-        int n = nums.size();
-
-        int l=0, r=n-1;
-        while(l<=r)
-         {
-          int mid = (r-l)/2 + l;
-
-          if(nums[mid]==target) return mid;
-          else if(nums[mid]<target) l=mid+1;
-               else r=mid-1;
-         }
-
-        return l;
+    int searchInsert(vector<int>& arr, int target) {
+        int n = arr.size();
+        
+        int up = lower_bound(arr.begin(),arr.end(),target) - arr.begin();
+        return up;
     }
 };
