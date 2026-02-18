@@ -1,17 +1,12 @@
 class Solution {
 public:
-    bool allEaten(vector<int> &piles, int k, int h) 
+    bool allEaten(vector<int> &piles, double k, int h) 
      {
       int n = piles.size();
       long long hTaken = 0LL;
       for(int i=0; i<n; i++)
        {
-        int div = piles[i]/k;
-        int rem = piles[i]%k;
-
-        hTaken += div;
-        if(rem) 
-          hTaken++;
+        hTaken += ceil(piles[i]/k);
        }
       return hTaken<=h;
      }
