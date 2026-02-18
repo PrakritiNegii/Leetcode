@@ -8,7 +8,6 @@ public:
          sum += (long long) weights[i];
 
        long long left = 1LL, right = sum;
-       long long minWeight = left;
 
        while(left<=right)
         {
@@ -36,16 +35,11 @@ public:
           }
 
          if(minDaysForMid<=days) //possible answer as this amount of weight can be carried each day but maybe less weight can also be carried each day.
-          {
-           minWeight = mid;
            right = mid-1;
-          }
          else
-          {
            left = mid+1;
-          }
         }
 
-      return (int) minWeight;
+      return (int) left;
     }
 };
