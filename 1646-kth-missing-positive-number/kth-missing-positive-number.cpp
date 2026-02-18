@@ -16,10 +16,10 @@ public:
             right = mid - 1;
          }
 
-        if(left==0) //missing no exists before first no
-          return k;
-        //left is the index after the missing number, i.e., arr[left]>missing no
-        int prevMissingNos = arr[left-1] - (left-1) - 1;
-        return arr[left-1] + (k-prevMissingNos);
+        // Derivation:
+        // The answer is 'k' more than the number of non-missing elements found so far.
+        // At the end of the loop, 'start' is the number of elements in the array smaller than the kth missing number.
+        // Formula: Result = k + start
+        return left + k;
     }
 };
