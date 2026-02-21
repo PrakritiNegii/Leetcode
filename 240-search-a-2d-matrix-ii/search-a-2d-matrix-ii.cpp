@@ -4,18 +4,14 @@ public:
         int rows = matrix.size();
         int cols = matrix[0].size();
 
-        for(int i=0; i<rows; i++)
+        int i=0, j=cols-1; 
+        while(i<rows && j>=0)
          {
-          int left = 0, right = cols-1;
-          while(left<=right)
-           {
-            int mid = (right-left)/2 + left;
-            if(matrix[i][mid]==target) return true;
-            if(target<matrix[i][mid])
-              right = mid - 1;
-            else 
-              left = mid + 1;
-           }
+          if(matrix[i][j]==target) return true;
+          if(matrix[i][j]>target) 
+            j--;
+          else
+            i++;
          }
 
         return false;
