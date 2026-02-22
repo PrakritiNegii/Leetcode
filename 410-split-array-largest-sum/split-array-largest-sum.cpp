@@ -5,11 +5,10 @@ public:
       int n = nums.size();
       long long sum = 0;
       int splits = 0;
-      int i=0;
+      int i = 0;
 
       while(i<n)
        {
-        if(nums[i]>maxSum) return false;
         sum += nums[i];
         if(sum>maxSum)
          {
