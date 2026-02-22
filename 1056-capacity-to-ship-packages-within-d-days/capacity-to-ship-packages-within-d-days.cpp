@@ -20,20 +20,16 @@ public:
          while(i<n)
           {
            dayWeight += weights[i];
-           if(dayWeight<=mid) 
-            {
-             i++;
-             if(i==n) //for last weight
-              minDaysForMid++;
-            }
-           else
+           if(dayWeight>mid) 
             {
              minDaysForMid++;
-             dayWeight = 0;
+             dayWeight = weights[i];
             }
+            i++;
            if(minDaysForMid>days) 
             break;
           }
+         minDaysForMid++;
 
          if(minDaysForMid<=days) //possible answer as this amount of weight can be carried each day but maybe less weight can also be carried each day.
            right = mid-1;
