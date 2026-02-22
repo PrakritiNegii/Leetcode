@@ -1,5 +1,23 @@
 class Solution {
 public:
+    bool possible(vector<int>& bloomDay, int days, int m, int k)
+     {
+      int bouquets = 0;
+      int flowers = 0;
+      for(int i=0; i<bloomDay.size(); i++)
+       {
+        if(bloomDay[i]<=days) 
+          flowers++;
+        else
+         {
+          bouquets += flowers/k;
+          flowers = 0;
+         }
+       }
+      bouquets += flowers/k;
+      return bouquets>=m;
+     }
+    
     int minDays(vector<int>& bloomDay, int m, int k) {
       int n = bloomDay.size();
 
@@ -8,27 +26,13 @@ public:
 
       int left = *min_element(bloomDay.begin(),bloomDay.end());
       int right = *max_element(bloomDay.begin(),bloomDay.end());
-      int minDaysWait = left;
 
       while(left<=right)
        {
         int mid = (right-left)/2 + left;
 
-        int bouquetsMade = 0;
-        int bouquetSize = 0;
-        for(int i=0; i<n; i++)
+        if(possible(bloomDay,mid,m,k)) //valid answer, can check for shorter wait time
          {
-          if(bloomDay[i]<=mid) bouquetSize++;
-          else bouquetSize = 0;
-          if(bouquetSize==k) 
-           { 
-            bouquetsMade++; 
-            bouquetSize = 0; 
-           }
-         }
-        if(bouquetsMade>=m) //valid answer, can check for shorter wait time
-         {
-          minDaysWait = mid;
           right = mid - 1;
          }
         else //wait longer for flowers to bloom
@@ -37,8 +41,7 @@ public:
          }
        }  
 
-      return minDaysWait;
+      return left;
     }
 };
 
-auto init = atexit([]() { ofstream("display_runtime.txt") << "0";});
