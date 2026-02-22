@@ -7,7 +7,8 @@ public:
        for(int i=0; i<n; i++)
          sum += (long long) weights[i];
 
-       long long left = 1LL, right = sum;
+       long long left = (long long) *min_element(weights.begin(),weights.end()); 
+       long long right = sum;
 
        while(left<=right)
         {
