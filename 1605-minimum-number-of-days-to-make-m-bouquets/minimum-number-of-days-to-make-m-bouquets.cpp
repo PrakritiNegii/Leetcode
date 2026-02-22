@@ -6,15 +6,14 @@ public:
       int flowers = 0;
       for(int i=0; i<bloomDay.size(); i++)
        {
-        if(bloomDay[i]<=days) 
-          flowers++;
-        else
-         {
-          bouquets += flowers/k;
-          flowers = 0;
+        if(bloomDay[i]<=days) flowers++;
+        else flowers = 0;
+        if(flowers==k) 
+         { 
+          bouquets++; 
+          flowers = 0; 
          }
        }
-      bouquets += flowers/k;
       return bouquets>=m;
      }
     
@@ -32,13 +31,9 @@ public:
         int mid = (right-left)/2 + left;
 
         if(possible(bloomDay,mid,m,k)) //valid answer, can check for shorter wait time
-         {
           right = mid - 1;
-         }
         else //wait longer for flowers to bloom
-         {
           left = mid + 1;
-         }
        }  
 
       return left;
