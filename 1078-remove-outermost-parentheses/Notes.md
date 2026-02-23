@@ -1,1 +1,1 @@
-<h2>remove-outermost-parentheses Notes</h2><hr>[ Time taken: 13 m 30 s ]
+<h2>remove-outermost-parentheses Notes</h2><hr>[ Time taken: 16 m 7 s ]
