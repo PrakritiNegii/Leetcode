@@ -4,44 +4,20 @@ public:
       int rows = matrix.size();
       int cols = matrix[0].size();
 
-      //select the row:
-      int left = 0, right = rows-1;
-      int r = -1;
+      //Interpret given 2D matrix as a 1D array
+      int left = 0, right = rows*cols - 1;
       while(left<=right)  
        {
         int mid = (right-left)/2 + left;
 
-        if(matrix[mid][0]==target || matrix[mid][cols-1]==target) 
-          return true;
+        int r = mid / cols;
+        int c = mid % cols;
 
-        if(target>matrix[mid][0] && target<matrix[mid][cols-1])
-         {
-          r = mid;
-          break;
-         }
-        else if(target<matrix[mid][0])
-               right = mid - 1;
-             else
-               left = mid + 1;
+        if(matrix[r][c]==target) return true;
+        if(matrix[r][c]<target) left = mid + 1;
+        else right = mid - 1;        
        }
- 
-      if(r==-1) return false;
 
-      cout<<r<<endl;
-      //search in row r
-      left = 0, right = cols-1;
-      while(left<=right)
-       {
-        int mid = (right-left)/2 + left;
-
-        if(matrix[r][mid]==target) 
-          return true;
-        else if(target<matrix[r][mid])
-               right = mid - 1;
-             else
-               left = mid + 1;
-       }
-      cout<<left<<"  "<<right<<endl;
       return false;
     }
 };
