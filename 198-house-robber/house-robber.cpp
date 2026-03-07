@@ -26,7 +26,8 @@ public:
             int currMoney = nums[i] + dp[i-k];
             maxMoney = max(currMoney,maxMoney);
            }
-          dp[i] = max(dp[i],maxMoney);
+          if(dp[i]>=maxMoney) break;
+          dp[i] = maxMoney;
          }
 
         return max(dp[n-1],dp[n-2]);
