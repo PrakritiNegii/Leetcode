@@ -10,8 +10,11 @@ public:
       int maxMoney = INT_MIN;
       for(int k=2; k<=i; k++)
        {
-
-        int currMoney = nums[i] + alternateRobbing(nums,i-k,dp); 
+        int currMoney = nums[i]; 
+        if(dp[i-k]!=-1)
+          currMoney += dp[i-k];
+        else 
+          currMoney  += alternateRobbing(nums,i-k,dp);
         maxMoney = max(maxMoney,currMoney);
        }
       return dp[i] = maxMoney;
