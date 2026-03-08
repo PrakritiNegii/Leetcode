@@ -43,15 +43,17 @@ public:
         minRank = min(minRank,rank1);
         minRank = min(minRank,rankn);
 
-        //if maxRank and minRank are equal all elements are equal
-        if(maxRank==minRank)
-            return -1;
+        //if maxRank and minRank are equal all elements are equal hence sorted
         
+
+        //if minimum is at its correct place, maximum is at its correct place or both are at their respective correct places string can be sorted by sorting just one half or just the middle portion
         if(rank1==minRank) return 1;
         if(rankn==maxRank) return 1;
 
+       //if minimum and maximum are at opposite places they will require three swaps to sort the string. However, if minRank or maxRank have duplicates present in the middle sorting will require only 2 swaps as in the first swap one of the minRank or maxRank will reach its correct position and after that only 1 sort is required
         if(rank1==maxRank && rankn==minRank && !dupOf1 && !dupOfn) return 3;
 
+// in the case that minRank and maxRank are not on either ends. Then one sort will position either the minRank at its correct position or maxRank at its correct position. After that only 1 sort is required to sort the complete string.
         return 2;
     }
 };
