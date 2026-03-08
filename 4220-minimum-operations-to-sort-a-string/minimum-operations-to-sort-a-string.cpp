@@ -43,8 +43,7 @@ public:
         minRank = min(minRank,rank1);
         minRank = min(minRank,rankn);
 
-        if(rank1==minRank) return 1;
-        if(rankn==maxRank) return 1;
+        if(rank1==minRank || rankn==maxRank) return 1;
 
         if(rank1==maxRank && rankn==minRank && !dupOf1 && !dupOfn) return 3;
 
