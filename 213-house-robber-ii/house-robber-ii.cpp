@@ -2,41 +2,30 @@ class Solution {
 public:
     int rob(vector<int>& nums) {
         int n = nums.size();
+
         if(n==1) return nums[0];
-        if(n==2) return max(nums[0],nums[1]);
 
-        vector<int> dp(n,-1);
-        dp[0] = 0; dp[1] = nums[1];
+        int with0prev = nums[0]; 
+        int with0prev2 = 0;
 
-        for(int i=2; i<n; i++) //robbing the last house but not the first one
+        int without0prev = 0;
+        int without0prev2 = 0;
+
+        for(int i=1; i<n; i++)
          {
-          int maxMoney = INT_MIN;
-          for(int k=2; k<=i; k++)
-           {               
-            int currMoney = nums[i] + dp[i-k];
-            maxMoney = max(currMoney,maxMoney);
-           }
-          dp[i] = maxMoney;
+          int pick1 = nums[i] + with0prev2;
+          int not_pick1 = with0prev;
+
+          with0prev2 = with0prev;
+          with0prev = max(pick1,not_pick1);
+
+          int pick2 = nums[i] + without0prev2;
+          int not_pick2 = without0prev;
+
+          without0prev2 = without0prev;
+          without0prev = max(pick2,not_pick2);
          }
-
-        vector<int> dp2(n-1,-1);
-        dp2[0] = nums[0]; dp2[1] = nums[1];
-
-        for(int i=2; i<n-1; i++) //robbing the first house but not the last one
-         {
-          int maxMoney = INT_MIN;
-          for(int k=2; k<=i; k++)
-           {               
-            int currMoney = nums[i] + dp2[i-k];
-            maxMoney = max(currMoney,maxMoney);
-           }
-          dp2[i] = maxMoney;
-         }
-
-        int ans = max(dp2[n-3],dp2[n-2]); //max money when first house was robbed from 2nd last and 3rd last houses
         
-        ans = max(ans,dp[n-1]);
-        
-        return ans;
+        return max(with0prev2, without0prev);
     }
 };
