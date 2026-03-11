@@ -4,30 +4,51 @@ public:
         int n = s.size();
         string ans = "";
 
+        int left = 0, right = 0;
         string temp = "";
-        for(int i=n-1; i>=0; i--)
+       
+        reverse(s.begin(),s.end());
+        while(right<n)
          {
-          if(s[i]==' ' && temp.empty()) continue;
-          if(s[i]==' ')
+          if(left==right && s[right]==' ') 
            {
-            reverse(temp.begin(),temp.end());
-            
-            if(!ans.empty()) ans+=' ';
-            ans += temp;
-            temp = "";
+            left++;
+            right++;
+            continue;
+           }
+          if(s[right]==' ')
+           {
+            reverse(s.begin()+left,s.begin()+right);
+            right++;
+            left = right;
            }
           else
            {
-            temp += s[i];
+            right++;
            }
          }
+        reverse(s.begin()+left,s.begin()+right);
 
-        reverse(temp.begin(),temp.end());
-        if(!temp.empty()) 
-         {
-          if(!ans.empty()) ans += ' ';
-          ans += temp;
-         }
-        return ans;
+       int i=0, j=0;
+       while(i<n)
+        {
+         if(s[i]!=' ')
+          {
+           s[j] = s[i];
+           j++; 
+          }
+         else if(j!=0 && s[i]==' ')
+               {
+                if(s[i-1]!=' ') 
+                  s[j++] = ' ';
+               }
+          i++;
+        }
+      if(n>1 && s[j-1]==' ') j--;
+    //  s.resize(j); 
+    //   s = s.substr(0,j);
+      s.erase(j); //Everything after index j including it is removed.
+      //Remove characters from the end using pop_back() (loop required)
+      return s;
     }
 };
