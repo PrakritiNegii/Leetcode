@@ -1,23 +1,26 @@
 class Solution {
 public: 
     int uniquePaths(int m, int n) {
-         vector<vector<int>> dp(m,vector<int>(n,0));
+         vector<int>dp (n,0);
          
-         dp[0][0] = 1;
-
          for(int i=0; i<m; i++)
           {
+           int left; //initially for each row there is no left
+           vector<int> temp(n,0);
            for(int j=0; j<n; j++)
             {
+             if(i==0 && j==0) temp[0] = 1;  //starting cell
              //check can you reach this particular cell from the top or from the left
              int newr = i-1; //check top
              int newc = j-1; //check left
 
-             if(newr>=0) dp[i][j] += dp[newr][j];
-             if(newc>=0) dp[i][j] += dp[i][newc];
+             if(newr>=0) temp[j] += dp[j];
+             if(newc>=0) temp[j] += left;
+
+             left = temp[j];
             }
-           cout<<endl;
+           dp = temp;
           }
-         return dp[m-1][n-1];
+         return dp[n-1];
     }
 };
