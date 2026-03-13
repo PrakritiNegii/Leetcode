@@ -9,7 +9,7 @@ public:
         for(int i=0; i<m; i++)
          {
           int n = triangle[i].size();
-          vector<int> curr(base,0);
+          vector<int> curr(n,0);
 
           for(int j=0; j<n; j++)
            {
