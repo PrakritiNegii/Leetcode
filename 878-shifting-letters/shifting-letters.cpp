@@ -18,7 +18,6 @@ public:
 
         toShift -= shifts[i];
        }
-      cout<<s<<endl;
       return s;
     }
 };
