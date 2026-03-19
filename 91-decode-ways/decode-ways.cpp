@@ -3,21 +3,26 @@ public:
     int numDecodings(string s) {
       int n = s.size();
 
-      vector<int> dp(n+1,0);
-      dp[n] = 1; //if we reach the end then the string has a valid decoding
+      //only the valid decoding possibility of the next 2 strings required
+      int next1 = 1, next2 = 1;
 
       for(int i=n-1; i>=0; i--)
        {
-        if(s[i]=='0') continue;
-        dp[i] += dp[i+1];
-        if(i < n-1) //another character present after the current
-          {
-            int l = s[i]-48, r = s[i+1]-48;
-            int val = l*10 + r;
-            if(val<=26)
-              dp[i] += dp[i+2];
-          }
+        int curr = 0;
+        if(s[i]!='0') 
+         {
+           curr += next1;
+           if(i < n-1) //another character present after the current
+            {
+              int l = s[i]-48, r = s[i+1]-48;
+              int val = l*10 + r;
+              if(val<=26)
+                curr += next2;
+            }
+         }
+         next2 = next1;
+         next1 = curr;
        }
-      return dp[0];
+      return next1;
     }
 };
