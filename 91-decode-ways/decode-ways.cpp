@@ -14,9 +14,7 @@ public:
            curr += next1;
            if(i < n-1) //another character present after the current
             {
-              int l = s[i]-48, r = s[i+1]-48;
-              int val = l*10 + r;
-              if(val<=26)
+              if(s[i]<='1' || (s[i]=='2' && s[i+1]<='6') )
                 curr += next2;
             }
          }
