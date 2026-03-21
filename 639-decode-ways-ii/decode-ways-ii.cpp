@@ -11,6 +11,7 @@ public:
        {
         if(s[i]=='0') 
          {
+          dp[i] = 0; //already 0 but for understanding
           continue;
          }
         if(s[i]=='*')
