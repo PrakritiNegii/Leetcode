@@ -19,7 +19,7 @@ public:
           if(i<n-1)
            {
             if(s[i+1]=='*') dp[i] = (dp[i] + (15LL * dp[i+2]) % MOD) % MOD;
-            else if(s[i+1]<='6') dp[i] = (dp[i] + (2LL * dp[i+2] % MOD) % MOD);
+            else if(s[i+1]<='6') dp[i] = (dp[i] + (2LL * dp[i+2]) % MOD) % MOD;
                  else dp[i] = (dp[i] + dp[i+2]) % MOD;
            }
          }
@@ -42,6 +42,6 @@ public:
          }
        }  
 
-      return dp[0]%MOD;
+      return dp[0];
     }
 };
