@@ -4,45 +4,49 @@ class Solution {
 public:
     int numDecodings(string s) {
       int n = s.size();
-      vector<long long> dp(n+1,0);
-      dp[n] = 1LL;
+
+      long long next1 = 1LL, next2 = 1LL;
 
       for(int i=n-1; i>=0; i--)
        {
-        if(s[i]=='0') 
-         {
-          dp[i] = 0; //already 0 but for understanding
-          continue;
-         }
+        int curr = 0;
+        if(s[i]=='0')
+          {
+            next2 = next1;
+            next1 = curr;
+            continue;
+          }
         if(s[i]=='*')
          {
-          dp[i] = (9LL * dp[i+1]) % MOD;
+          curr = (9LL * next1) % MOD;
           if(i<n-1)
            {
-            if(s[i+1]=='*') dp[i] = (dp[i] + (15LL * dp[i+2]) % MOD) % MOD;
-            else if(s[i+1]<='6') dp[i] = (dp[i] + (2LL * dp[i+2]) % MOD) % MOD;
-                 else dp[i] = (dp[i] + dp[i+2]) % MOD;
+            if(s[i+1]=='*') curr = (curr + (15LL * next2) % MOD) % MOD;
+            else if(s[i+1]<='6') curr = (curr + (2LL * next2) % MOD) % MOD;
+                 else curr = (curr + next2) % MOD;
            }
          }
         else
          {
-          dp[i] = dp[i+1];
+          curr = next1;
           if(i<n-1 && s[i]<='2')
            {
             if(s[i+1]=='*')
              {
-              if(s[i]=='1') dp[i] = (dp[i] + (dp[i+2] * 9LL) % MOD) % MOD;
-              else dp[i] = (dp[i] + (dp[i+2] * 6LL) % MOD) % MOD;
+              if(s[i]=='1') curr = (curr + (next2 * 9LL) % MOD) % MOD;
+              else curr = (curr + (next2 * 6LL) % MOD) % MOD;
              }
             else
              {
-              if(s[i]=='1') dp[i] = (dp[i] + dp[i+2]) % MOD;
-              if(s[i]=='2' && s[i+1]<='6') dp[i] = (dp[i] + dp[i+2]) % MOD;
+              if(s[i]=='1') curr = (curr + next2) % MOD;
+              if(s[i]=='2' && s[i+1]<='6') curr = (curr + next2) % MOD;
              }
            }
          }
+        next2 = next1;
+        next1 = curr;
        }  
 
-      return dp[0];
+      return next1;
     }
 };
