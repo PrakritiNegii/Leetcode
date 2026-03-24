@@ -10,7 +10,7 @@ public:
        long long prefixProd = 1LL;
        long long suffixProd = 1LL;
 
-       for(int i=0, j=n*m-1; i<n*m, j>=0; i++, j--)
+       for(int i=0, j=n*m-1; i<n*m && j>=0; i++, j--)
         {
          prefix[i] = prefixProd;
          prefixProd = (prefixProd % MOD) * (grid[i/n][i%n] % MOD);
