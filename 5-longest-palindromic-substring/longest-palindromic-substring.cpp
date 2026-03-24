@@ -1,9 +1,8 @@
 class Solution {
 public:
     string longestPalindrome(string s) {
-        if(s.size()==1) return s;
         int n = s.size();
-        int fl=0, fr=0;
+        int fl=0;
         int len = 1;
         //for odd length string
         for(int i=0; i<n; i++)
@@ -18,7 +17,6 @@ public:
                {
                 len = r-l-1;
                 fl = l+1;
-                fr = r-1;
                }
               palin = false;
               break;
@@ -27,7 +25,7 @@ public:
            }
           if(palin && len < r-l-1)
            {
-            len = r-l-1; fl=l+1; fr=r-1;
+            len = r-l-1; fl=l+1; 
            } 
          }
 
@@ -45,7 +43,6 @@ public:
                {
                 len = r-l-1;
                 fl = l+1;
-                fr = r-1;
                }
               palin = false;
               break;
@@ -54,7 +51,7 @@ public:
            }
           if(palin && len < r-l-1)
            {
-            len = r-l-1; fl=l+1; fr=r-1;
+            len = r-l-1; fl=l+1; 
            } 
          }
 
