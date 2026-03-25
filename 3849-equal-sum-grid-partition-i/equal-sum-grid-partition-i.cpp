@@ -20,6 +20,7 @@ public:
             h += grid[i][j];
            }
           if(h==total/2) return true;
+          if(h>total/2) break;
          }
 
         for(int j=0; j<grid[0].size(); j++)
@@ -29,6 +30,7 @@ public:
             v += grid[i][j];
            }
           if(v==total/2) return true;
+          if(v>total/2) break;
          }
 
         return false;
