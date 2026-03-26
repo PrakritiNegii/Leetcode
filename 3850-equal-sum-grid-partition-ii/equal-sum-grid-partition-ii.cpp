@@ -85,7 +85,6 @@ public:
             if(second[grid[i][j]]==0) second.erase(grid[i][j]);
            }
           vsecond = total - vfirst;
-          cout<<vfirst<<"\thh\t"<<vsecond<<endl;
           if(vfirst==vsecond) return true;
           
           long long search;
