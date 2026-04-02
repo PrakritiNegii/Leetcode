@@ -6,17 +6,12 @@ public:
 
         vector<vector<vector<int>>> dp(n,vector<vector<int>>(m,vector<int>(3,-1)));
         
-        if(coins[0][0]<0)
+        for(int neutralize=0; neutralize<=2; neutralize++)
          {
-          dp[0][0][0] = coins[0][0];
-          dp[0][0][1] = 0;
-          dp[0][0][2] = 0;
-         }
-        else
-         {
-          dp[0][0][0] = coins[0][0];
-          dp[0][0][1] = coins[0][0];
-          dp[0][0][2] = coins[0][0];
+          if(coins[0][0]<0 && neutralize>0) 
+            dp[0][0][neutralize] = 0;
+          else 
+            dp[0][0][neutralize] = coins[0][0];
          }
 
         for(int i=0; i<n; i++)
