@@ -16,11 +16,15 @@ public:
 
         for(int i=0; i<n; i++)
          {
-          vector<vector<int>> curr;
-          curr=prev;
+          vector<vector<int>> curr(m,vector<int>(3,-1e9));
+
           for(int j=0; j<m; j++)
            {
-            if(i==0 && j==0) continue;
+            if(i == 0 && j == 0) 
+             {
+              curr[j] = prev[j];
+              continue;
+             }
 
             for(int neutralize=0; neutralize<=2; neutralize++)
              {
