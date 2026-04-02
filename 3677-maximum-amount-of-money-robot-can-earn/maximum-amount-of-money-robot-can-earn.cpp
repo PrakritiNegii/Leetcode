@@ -1,31 +1,5 @@
 class Solution {
 public:
-    int maxAmt(vector<vector<int>>& coins, int i, int j, int neutralize,vector<vector<vector<int>>>& dp)
-     {
-      if(i==0 && j==0) 
-      {
-        if(coins[0][0]<0 && neutralize>0) return 0;
-        return coins[0][0];
-      }
-
-      if(i<0 || j<0) return -1e9;
-
-      if(dp[i][j][neutralize]!=-1) return dp[i][j][neutralize];
-
-      int left = coins[i][j] + maxAmt(coins,i,j-1,neutralize,dp);
-      int top = coins[i][j] + maxAmt(coins,i-1,j,neutralize,dp);
-
-      if(coins[i][j]<0 && neutralize>0)
-       {
-        int leftN = maxAmt(coins,i,j-1,neutralize-1,dp);
-        left = max(left,leftN);
-        int topN = maxAmt(coins,i-1,j,neutralize-1,dp);
-        top = max(top,topN);
-       }
-
-      return dp[i][j][neutralize] = max(left,top);
-     }
-
     int maximumAmount(vector<vector<int>>& coins) {
         int n = coins.size();
         int m = coins[0].size();
