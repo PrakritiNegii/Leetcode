@@ -1,22 +1,19 @@
 class Solution {
 public:
-    bool partitioning(vector<int>& nums, int i, int sum1, int sum2, int target, vector<vector<int>>& dp)
+    bool partitioning(vector<int>& nums, int i, int sum, vector<vector<int>>& dp)
      {
-      if(sum1>target || sum2>target) return false;
-      if(i==nums.size()) 
-       {
-        if(sum1==sum2) return true;
-        return false;
-       }
+      if(sum<0) return false;
+      if(sum==0) return true;
+      if(i==0) return false;
 
-      if(dp[i][sum1]!=-1) return dp[i][sum1];
+      if(dp[i][sum]!=-1) return dp[i][sum];
       //picking for subset 1;
-      bool s1 = partitioning(nums,i+1,sum1+nums[i],sum2,target,dp);
+      bool s1 = partitioning(nums,i-1,sum-nums[i],dp);
 
       //picking for subset 2;
-      bool s2 = partitioning(nums,i+1,sum1,sum2+nums[i],target,dp);
+      bool s2 = partitioning(nums,i-1,sum,dp);
 
-      return dp[i][sum1] = s1 || s2;
+      return dp[i][sum] = s1 || s2;
      }
 
     bool canPartition(vector<int>& nums) {
@@ -33,6 +30,6 @@ public:
 
         vector<vector<int>> dp(n, vector<int>(total+1,-1));
 
-        return partitioning(nums,0,0,0,total,dp);
+        return partitioning(nums,n-1,total,dp);
     }
 };
