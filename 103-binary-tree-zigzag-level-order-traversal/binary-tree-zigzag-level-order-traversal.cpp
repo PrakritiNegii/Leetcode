@@ -41,7 +41,7 @@ public:
            }
 
           ans.push_back(row);
-          LR = !(LR & 1);
+          LR = !LR;
          }
 
        return ans;
