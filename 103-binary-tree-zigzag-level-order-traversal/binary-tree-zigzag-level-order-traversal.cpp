@@ -15,41 +15,35 @@ public:
         vector<vector<int>> ans;
         if(root==NULL) return ans;
 
-        queue<pair<TreeNode*,int>> q;
-        q.push({root,0});  
-
-        ans.push_back({});
-        ans[0].push_back(root->val);
+        queue<TreeNode*> q;
+        q.push(root);  
+        bool LR = true;
 
         while(!q.empty())
          {
-          TreeNode* node = q.front().first;
-          int level = q.front().second;
-          q.pop();
+          int n = q.size();
+          vector<int> row(n);
 
-          cout<<node->val<<"\t"<<level<<endl;
+          for(int i=0; i<n; i++)
+           {
+            TreeNode *node = q.front();
+            q.pop();
 
-          TreeNode* l = node->left;
-          TreeNode* r = node->right;
+            int idx;
+            if(LR) idx = i;
+            else idx = n-i-1;
 
-          if((l || r) && ans.size()<=level+1) ans.push_back({});
-          
-          if(l!=NULL)
-             {
-               q.push({l,level+1});
-               ans[level+1].push_back(l->val);
-             }
-          if(r!=NULL)
-             {
-               q.push({r,level+1});
-               ans[level+1].push_back(r->val);
-             }
+            row[idx] = node->val;
+            if(node->left != NULL)
+               q.push(node->left);
+            if(node->right)
+               q.push(node->right);
+           }
+
+          ans.push_back(row);
+          LR = !(LR & 1);
          }
 
-        for(int i=0; i<ans.size(); i++)
-         {
-          if(i%2==1) reverse(ans[i].begin(),ans[i].end());
-         }
        return ans;
     }
 };
