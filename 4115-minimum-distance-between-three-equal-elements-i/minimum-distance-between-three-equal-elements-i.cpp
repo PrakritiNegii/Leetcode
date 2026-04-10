@@ -1,34 +1,31 @@
 class Solution {
 public:
     int minimumDistance(vector<int>& nums) {
-        int n = nums.size();
-        if(n<3) return -1;
+      int n = nums.size();
+      if(n<3) return -1;
 
-        unordered_map<int,int> map;
-        for(int i=0; i<n; i++)
-          map[nums[i]]++;
+      vector<vector<int>> indices(n+1);
+      for(int i=0; i<n; i++)
+        indices[nums[i]].push_back(i);
 
-        int minDist = INT_MAX;
-        for(int i=0; i<n; i++)
+      int minDist = INT_MAX;
+      /*
+      The distance formula abs(i - j) + abs(j - k) + abs(k - i) simplifies to 
+      2 * (max(i, j, k) - min(i, j, k)).
+      */
+      for(int i=0; i<=n; i++)
+       {
+        if(indices[i].size()<3) continue;
+        
+        for(int j=2; j<indices[i].size(); j++)
          {
-          if(map[nums[i]]<3) continue;
-          int i1 = i, j1 = -1, k1 = -1;
-          for(int j=i+1; j<n; j++)
-           {
-            if(nums[j]==nums[i])
-             {
-              if(j1==-1) j1 = j;
-              else k1 = j; 
-             }
-
-            if(j1!=-1 && k1!=-1) break;
-           }
-          int dist = abs(i1-j1) + abs(j1-k1) + abs(k1-i1);
-          minDist = min(minDist,dist);
-          map[nums[i]]--;
+          int maxIdx = max({indices[i][j],indices[i][j-1],indices[i][j-2]});
+          int minIdx = min({indices[i][j],indices[i][j-1],indices[i][j-2]});
+          minDist = min(minDist, maxIdx-minIdx);
          }
+       }
 
-        if(minDist==INT_MAX) return -1;
-        return minDist;
+      if(minDist==INT_MAX) return -1;
+      return minDist*2;
     }
 };
