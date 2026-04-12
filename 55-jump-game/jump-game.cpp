@@ -5,11 +5,8 @@ public:
         int validIdx = n-1;
 
         for(int i=n-2; i>=0; i--)
-         {
           if(nums[i]>= (validIdx-i)) validIdx = i;
-         }
 
-        if(validIdx!=0) return false;
-        return true;
+        return validIdx==0;
     }
 };
