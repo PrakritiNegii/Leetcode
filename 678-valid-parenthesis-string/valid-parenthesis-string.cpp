@@ -3,7 +3,6 @@ public:
     bool checkValidString(string s) {
         int n = s.size();
         int left = 0, right = 0, star = 0;
-        int idx = -1;
 
         for(int i=0; i<n; i++)
          {
@@ -15,12 +14,11 @@ public:
            {
             if(star==0) return false;
             star--; left++;
-            idx = i;
            }
          }
 
         left = 0, right = 0, star = 0;
-        for(int i=n-1; i>idx; i--)
+        for(int i=n-1; i>=0; i--)
          {
           if(s[i]=='(') left++;
           else if(s[i]==')') right++;
