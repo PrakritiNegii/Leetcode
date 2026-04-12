@@ -4,13 +4,12 @@ public:
         if(amount==0) return 0;
         int n = coins.size();
 
-        vector<int> prev(amount+1,1e8);
+        vector<int> prev(amount+1,1e8), curr(amount+1,1e8);
         prev[0] = 0;
+        curr[0] = 0;
 
         for(int i=0; i<n; i++)
          {
-          vector<int> curr(amount+1,1e8);
-          curr[0] = 0;
           for(int amt=1; amt<=amount; amt++)
            {
             //not picking current coin
