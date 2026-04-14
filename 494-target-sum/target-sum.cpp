@@ -4,12 +4,9 @@ public:
      {
       if(i==0)
        {
-        int t1 = target + nums[0];
-        int t2 = target - nums[0];
-
         int count = 0;
-        if(t1==0) count++;
-        if(t2==0) count++;
+        if(target==nums[0]) count++;
+        if(target==-nums[0]) count++;
 
         return count;
        }
