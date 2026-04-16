@@ -1,36 +1,30 @@
 class Solution {
 public:
     bool checkValidString(string s) {
-        int n = s.size();
-        int left = 0, right = 0, star = 0;
+        int min = 0, max = 0;
 
-        for(int i=0; i<n; i++)
+        int i=0;
+        while(i<s.size())
          {
-          if(s[i]=='(') left++;
-          else if(s[i]==')') right++;
-               else star++;
-
-          if(left<right)
+          if(s[i]=='(')
            {
-            if(star==0) return false;
-            star--; left++;
+            min++; max++;
            }
+          else if(s[i]==')')
+                {
+                 min--; max--;
+                }
+               else
+                  {
+                    min--; 
+                    max++;
+                  }
+          if(min<0) min = 0;
+          if(max<0) return false;
+          i++;
          }
 
-        left = 0, right = 0, star = 0;
-        for(int i=n-1; i>=0; i--)
-         {
-          if(s[i]=='(') left++;
-          else if(s[i]==')') right++;
-               else star++;
-
-          if(right<left)
-           {
-            if(star==0) return false;
-            star--; right++;
-           }
-         }
-
+        if(min>0) return false;
         return true;
     }
 };
