@@ -1,4 +1,4 @@
 # Write your MySQL query statement below
-SELECT Person.lastName, Person.firstName, Address.city, Address.state 
-FROM Person
-LEFT OUTER JOIN Address on Person.personId = Address.personId;
+SELECT p.lastName, p.firstName, a.city, a.state 
+FROM Person as p LEFT OUTER JOIN Address as a 
+on p.personId = a.personId;
