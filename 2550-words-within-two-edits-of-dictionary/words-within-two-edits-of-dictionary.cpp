@@ -13,11 +13,6 @@ public:
           for(int j=0; j<sizeD; j++)
            {
             string d = dictionary[j];
-            if(q==d) 
-             {
-              ans.push_back(q);
-              break; //one match is enough to push the query
-             }
             int edits = 0;
             for(int k=0; k<n; k++)
              {
