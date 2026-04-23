@@ -10,15 +10,6 @@ public:
           mp[val].push_back(i);
          }
 
-        // for(auto val : mp)
-        //  {
-        //   cout<<"\t"<<val.first<<endl;
-        //   int size = val.second.size();
-        //   for(int i=0; i<size; i++)
-        //      cout<<val.second[i]<<endl;
-        //  }
-        //  cout<<"------------------------"<<endl;
-
         vector<long long> count(n,0);
 
         for(auto val : mp)
@@ -32,9 +23,6 @@ public:
           for(int j=0; j<size; j++)
            {
             int currPos = val.second[j];
-            // cout<<currPos<<endl;
-            // cout<<leftSize<<"\t"<<rightSize<<endl;
-            // cout<<left<<"\t"<<right<<endl<<endl<<endl;
             count[currPos] += abs((long long) currPos*leftSize - left);
             count[currPos] += abs((long long) currPos*rightSize - right);
 
