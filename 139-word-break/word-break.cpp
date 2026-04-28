@@ -4,7 +4,7 @@ public:
      {
       if(i>=s.size()) return true;
       if(dp[i]!=-1) return dp[i];
-      
+
       string segment = "";
       bool canBreak = false;
       for(int j=i; j<s.size(); j++)
@@ -13,18 +13,15 @@ public:
         if(st.count(segment)!=0)
            canBreak = breakable(s,st,j+1,dp);
 
-        if(canBreak) return dp[j+1] = true;
+        if(canBreak) return dp[i] = true;
        }
       return dp[i] = false;
      }
 
     bool wordBreak(string s, vector<string>& wordDict) {
         int n = s.size();
-        unordered_set <string> st;
+        unordered_set <string> st{begin(wordDict), end(wordDict)};
         vector<int> dp(n+1,-1);
-
-        for(string str : wordDict)
-           st.insert(str);
 
         return breakable(s,st,0,dp);
     }
