@@ -21,8 +21,8 @@ public:
     bool wordBreak(string s, vector<string>& wordDict) {
         int n = s.size();
         unordered_set <string> st{begin(wordDict), end(wordDict)};
-        vector<int> dp(n+1,-1);
-
+        vector<int> dp(n,-1);
+        
         return breakable(s,st,0,dp);
     }
 };
