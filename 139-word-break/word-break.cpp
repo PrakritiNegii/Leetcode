@@ -9,7 +9,6 @@ public:
         for(int i=n-1; i>=0; i--)
          {
            string segment = "";
-           bool canBreak = false;
            for(int j=i; j<s.size(); j++)
             {
              segment += s[j];
@@ -18,8 +17,6 @@ public:
              if(dp[i]) break;
             }
          }
-        for(int i=0; i<n; i++)
-          cout<<dp[i]<<endl;
 
         return dp[0];
     }
