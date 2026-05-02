@@ -10,7 +10,7 @@ public:
        vector<int> dp(n+1,1e8);
 
        dp[0] = 0;
-
+       // dp[i] = minimum squares to form i
        for(int i=1; i<=n; i++)
         {
          for(int j=1; j*j<=i; j++)
@@ -20,7 +20,7 @@ public:
            int notTake = dp[i];
 
            int take = 1e8;
-           if(j<=i)
+           if(square<=i)
                take = 1 + dp[i-square];
 
            dp[i] = min(take,notTake);
