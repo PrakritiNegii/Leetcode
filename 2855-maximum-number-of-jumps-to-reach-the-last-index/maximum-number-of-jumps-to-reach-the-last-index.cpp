@@ -3,16 +3,16 @@ public:
     int maxJumps(vector<int> &nums, int j, int target, vector<int> &dp)
      {
       if(j<=0) return 0;
-      if(dp[j]!=-1) return dp[j];
+      if(dp[j]!=0) return dp[j];
 
-      int jumps = INT_MIN;
+      int jumps = -1;
       for(int i=j-1; i>=0; i--)
        {
         int diff = nums[j] - nums[i];
         if(diff>=-target && diff<=target)
           {
            int jmp = maxJumps(nums,i,target,dp);
-           if(jmp!=INT_MIN)
+           if(jmp!=-1)
              jumps = max(jumps,1+jmp);
           }
        }
@@ -22,10 +22,8 @@ public:
     int maximumJumps(vector<int>& nums, int target) {
       int n = nums.size();
 
-      vector<int> dp(n,-1);
+      vector<int> dp(n,0);
       
-      int jumps = maxJumps(nums,n-1,target,dp);
-      if(jumps<0) return -1;
-      return jumps;
+      return maxJumps(nums,n-1,target,dp);
     }
 };
