@@ -2,7 +2,7 @@ class Solution {
 public:
     int maxJumps(vector<int> &nums, int j, int target, vector<int> &dp)
      {
-      if(j<=0) return 0;
+      if(j==0) return 0;
       if(dp[j]!=0) return dp[j];
 
       int jumps = -1;
