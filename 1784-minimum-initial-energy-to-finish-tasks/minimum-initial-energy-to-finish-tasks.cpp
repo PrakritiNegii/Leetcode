@@ -8,19 +8,20 @@ public:
         int n = tasks.size();
         sort(tasks.begin(),tasks.end(),comp);
 
-        int total = tasks[0][1];
+        int totalEffort = tasks[0][1];
         int totalActual = tasks[0][0];
 
-        int curr = total - totalActual;
+        int curr = totalEffort - totalActual;
         for(int i=1; i<n; i++)
          {
           int req = tasks[i][1] - curr;
-          if(req>0) total += req;
+          if(req>0) 
+            totalEffort += req;
 
           totalActual += tasks[i][0];
-          curr = total - totalActual;
+          curr = totalEffort - totalActual;
          } 
 
-        return total;
+        return totalEffort;
     }
 };
