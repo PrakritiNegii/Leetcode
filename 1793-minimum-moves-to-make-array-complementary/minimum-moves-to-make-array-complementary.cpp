@@ -34,10 +34,7 @@ public:
         diff[i] += diff[i-1];
         if(minimum>diff[i]) minimum = diff[i];
        }
-
-    //   for(int i=2; i<limit*2+2; i++)
-    //     cout<<diff[i]<<"\t";
-
+       
       return minimum;
     }
 };
