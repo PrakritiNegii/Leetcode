@@ -23,6 +23,6 @@ public:
                   }
          }
 
-        return nums[left]; //or nums[right] if left==right
+        return nums[right]; //or nums[left] as left==right
     }
 };
