@@ -9,17 +9,6 @@ public:
           mp[arr[i]].push_back(i);
          }
 
-        // for(auto val : mp)
-        //  {
-        //   cout<<endl<<val.first<<endl;
-        //   cout<<"array: ";
-        //   auto a = val.second;
-        //   for(int j=0; j<a.size(); j++)
-        //    {
-        //     cout<<a[j]<<"\t";
-        //    }
-        //  }
-
         queue<pair<int,int>> q; //index and step
         q.push({0,0});
 
@@ -33,8 +22,6 @@ public:
           int idx = q.front().first;
           int step = q.front().second;
           q.pop();
-
-        //   cout<<idx<<"\t"<<step<<endl;
 
           if(idx==n-1) minStep = min(minStep,step);
 
@@ -52,7 +39,6 @@ public:
           auto a = mp[arr[idx]];
           for(int j=0; j<a.size(); j++)
            {
-            // cout<<"array: "<<a[j]<<"\t";
             if(idx==arr[j]) continue;
             if(!visited[a[j]])
               {
