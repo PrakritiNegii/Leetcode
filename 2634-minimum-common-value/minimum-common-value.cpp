@@ -3,14 +3,12 @@ public:
     int getCommon(vector<int>& nums1, vector<int>& nums2) {
         int n1 = nums1.size();
         int n2 = nums2.size();
-        unordered_set<int> st;
 
-        for(int i=0; i<n1; i++)
-          st.insert(nums1[i]);
-
-        for(int i=0; i<n2; i++)
+        for(int i=0, j=0; i<n1 && j<n2;)
          {
-          if(st.count(nums2[i])!=0) return nums2[i];
+          if(nums1[i]==nums2[j]) return nums1[i];
+          if(nums1[i]<nums2[j]) i++;
+          else j++;
          }
 
         return -1;
