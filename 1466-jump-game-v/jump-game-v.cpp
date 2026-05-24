@@ -37,7 +37,7 @@ public:
 
         for(int i=0; i<n; i++)
          {
-
+          if(dp[i]!=0) continue;
           maxVisits = max(maxVisits,dfs(arr,d,i,dp));
          }
 
