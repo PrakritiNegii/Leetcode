@@ -15,7 +15,7 @@ public:
           int i = q.front();
           q.pop();
 
-          for(int j=max(i+minJump,maxIdx); j<=min(i+maxJump,n-1); j++)
+          for(int j=max(i+minJump,maxIdx+1); j<=min(i+maxJump,n-1); j++)
            {
             maxIdx = j;
             if(visited[j]==true) continue;
