@@ -17,10 +17,7 @@ public:
            {
             maxIdx = j;
 
-            if(s[j]=='1')
-             {
-              continue;
-             } 
+            if(s[j]=='1') continue;
             
             if(j==n-1) return true;
             q.push(j);
