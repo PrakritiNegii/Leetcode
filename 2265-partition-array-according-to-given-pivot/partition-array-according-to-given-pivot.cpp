@@ -4,7 +4,6 @@ public:
         int n = num.size();
         vector<int> nums = num;
         stack<int> st;
-        int pivotCount = 0;
 
         int i=0, j=0;
         while(j<n)
@@ -14,11 +13,7 @@ public:
             swap(nums[i],nums[j]);
             i++; 
            }
-          else if(nums[j]==pivot)
-                 {
-                  pivotCount++;
-                 }
-                else
+          else if(nums[j]>pivot)
                  {
                   st.push(nums[j]);
                  }
@@ -32,11 +27,10 @@ public:
           st.pop();
           j--;
          }
-        while(pivotCount!=0)
+        while(j>=i)
          {
           nums[j] = pivot;
           j--;
-          pivotCount--;
          }
 
         return nums;
