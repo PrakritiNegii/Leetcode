@@ -11,8 +11,6 @@ public:
           mini = min(mini,nums[i]);
          }
 
-        int val = maxi-mini;
-
-        return (long long) val*k;
+        return (long long) (maxi-mini)*k;
     }
 };
