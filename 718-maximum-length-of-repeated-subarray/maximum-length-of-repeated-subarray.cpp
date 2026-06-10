@@ -3,7 +3,7 @@ public:
     int findLength(vector<int>& nums1, vector<int>& nums2) {
         int n = nums1.size(), m = nums2.size();
 
-        vector<vector<int>> dp(n+1,vector<int>(m+1,0));
+        vector<int> prev(m+1,0), curr(m+1,0);
         int overallMaxLen = 0;
 
         for(int i=1; i<=n; i++)
@@ -12,10 +12,13 @@ public:
            {
             if(nums1[i-1]==nums2[j-1])
              {
-              dp[i][j] = 1 + dp[i-1][j-1];
-              overallMaxLen = max(overallMaxLen,dp[i][j]);
+              curr[j] = 1 + prev[j-1];
+              overallMaxLen = max(overallMaxLen,curr[j]);
              }
+            else
+              curr[j] = 0;
            }
+          prev = curr;
          }
 
         return overallMaxLen;
