@@ -17,7 +17,6 @@ public:
           prev = curr;
          }
 
-        int ans = (n-prev[m]) + (m-prev[m]);
-        return ans;
+        return (n-prev[m]) + (m-prev[m]);
     }
 };
