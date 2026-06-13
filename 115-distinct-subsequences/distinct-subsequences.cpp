@@ -22,13 +22,10 @@ public:
           for(int j=1; j<=m; j++)
            {
             if(t[i-1]==s[j-1]) 
-              {
                 dp[i][j] = lastC;
-              }
+
             if(lasti==s[j-1])
-              {
                 lastC += 1LL * dp[i-1][j];
-              }
            }
          }
          
