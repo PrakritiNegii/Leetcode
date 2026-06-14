@@ -1,1 +1,1 @@
-<h2>maximum-twin-sum-of-a-linked-list Notes</h2><hr>[ Time taken: 20m 44s ]
+<h2>maximum-twin-sum-of-a-linked-list Notes</h2><hr>[ Time taken: 39m 6s ]
