@@ -8,7 +8,7 @@ public:
 
       if(dp[i][j]!=-1) return dp[i][j];
 
-      if(w1[i-1]==w2[j-1]) return minChanges(w1,i-1,w2,j-1,dp);
+      if(w1[i-1]==w2[j-1]) return dp[i][j] = minChanges(w1,i-1,w2,j-1,dp);
      
       int rem = 1 + minChanges(w1,i-1,w2,j,dp);
       int ins = 1 + minChanges(w1,i,w2,j-1,dp);
