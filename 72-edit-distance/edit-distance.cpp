@@ -2,7 +2,6 @@ class Solution {
 public:
     int minChanges(string &w1, int i, string &w2, int j, vector<vector<int>>& dp)
      {
-      cout<<i<<"\t"<<j<<endl;
       if(i==0 && j==0) return 0;
       if(i==0) return j;
       if(j==0) return i;
