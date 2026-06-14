@@ -9,7 +9,7 @@ public:
       if(dp[i][j]!=-1) return dp[i][j];
 
       int match = 1e8;
-      if(w1[i]==w2[j]) match = minChanges(w1,i+1,w2,j+1,dp);
+      if(w1[i]==w2[j]) return match = minChanges(w1,i+1,w2,j+1,dp);
      
       int rem = 1 + minChanges(w1,i+1,w2,j,dp);
       int ins = 1 + minChanges(w1,i,w2,j+1,dp);
