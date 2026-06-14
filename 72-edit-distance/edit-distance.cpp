@@ -1,26 +1,33 @@
 class Solution {
 public:
-    int minChanges(string &w1, int i, string &w2, int j, vector<vector<int>>& dp)
-     {
-      if(i==0 && j==0) return 0;
-      if(i==0) return j;
-      if(j==0) return i;
+    int minDistance(string w1, string w2) {
+        int n = w1.size(), m = w2.size();
 
-      if(dp[i][j]!=-1) return dp[i][j];
+        vector<vector<int>> dp(n+1,vector<int>(m+1,0));
 
-      if(w1[i-1]==w2[j-1]) return dp[i][j] = minChanges(w1,i-1,w2,j-1,dp);
-     
-      int rem = 1 + minChanges(w1,i-1,w2,j,dp);
-      int ins = 1 + minChanges(w1,i,w2,j-1,dp);
-      int rep = 1 + minChanges(w1,i-1,w2,j-1,dp);
+        for(int i=1; i<=n; i++) //when j is 0
+          dp[i][0] = i;        
 
-      return dp[i][j] = min({rem,ins,rep});
-     }
+        for(int j=1; j<=m; j++) //where i is 0
+          dp[0][j] = j;
 
-    int minDistance(string word1, string word2) {
-        int n = word1.size(), m = word2.size();
+        for(int i=1; i<=n; i++)
+         {
+          for(int j=1; j<=m; j++)
+           {
+            if(w1[i-1]==w2[j-1]) 
+              dp[i][j] = dp[i-1][j-1];
+            else
+             {
+              int rem = 1 + dp[i-1][j];
+              int ins = 1 + dp[i][j-1];
+              int rep = 1 + dp[i-1][j-1];
 
-        vector<vector<int>> dp(n+1,vector<int>(m+1,-1));
-        return minChanges(word1,n,word2,m,dp);
+              dp[i][j] = min({rem,ins,rep});
+             }
+           }
+         }
+
+        return dp[n][m];
     }
 };
