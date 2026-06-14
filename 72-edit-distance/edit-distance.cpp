@@ -8,14 +8,13 @@ public:
 
       if(dp[i][j]!=-1) return dp[i][j];
 
-      int match = 1e8;
-      if(w1[i]==w2[j]) return match = minChanges(w1,i+1,w2,j+1,dp);
+      if(w1[i]==w2[j]) return minChanges(w1,i+1,w2,j+1,dp);
      
       int rem = 1 + minChanges(w1,i+1,w2,j,dp);
       int ins = 1 + minChanges(w1,i,w2,j+1,dp);
       int rep = 1 + minChanges(w1,i+1,w2,j+1,dp);
 
-      return dp[i][j] = min({match,rem,ins,rep});
+      return dp[i][j] = min({rem,ins,rep});
      }
 
     int minDistance(string word1, string word2) {
