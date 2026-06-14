@@ -11,31 +11,34 @@
 class Solution {
 public:
     int pairSum(ListNode* head) {
-       int twins = 0;
        ListNode *temp = head;
+       ListNode *head2 = head;
 
        while(temp!=NULL)
         {
           temp=temp->next->next;
-          twins++;
+          head2 = head2->next;
         } 
 
-       vector<int> store(twins,0);
-       int i=0;
-       temp = head;
-
-       while(temp!=NULL)
+       ListNode *prev = NULL, *curr = head2, *nxt = NULL;
+       while(curr!=NULL)
         {
-         int idx = i;
-         if(i>=twins) idx = (twins*2)-i-1;
-         store[idx] += temp->val;
-         temp = temp->next;
-         i++;
+         nxt = curr->next;
+         curr->next = prev;
+         prev = curr;
+         curr = nxt;
         }
 
+       head2 = prev;
+       
        int maxVal = 0;
-       for(int i=0; i<twins; i++)
-         maxVal = max(maxVal,store[i]);
+       while(head2!=NULL)
+        {
+         int sum = head->val + head2->val;
+         maxVal = max(maxVal,sum);
+         head = head->next;
+         head2 = head2->next;
+        }
 
        return maxVal;
     }
