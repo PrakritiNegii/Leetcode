@@ -29,20 +29,14 @@ public:
           break;
          }
 
-// cout<<"star\t"<<star<<endl;
       int idx = 0;
       if(star!=0)
         idx = hasSubstring(s,0,n-1,p,0,star-1);
-
-    // cout<<"1-idx\t"<<idx<<endl;
 
       if(idx==-1) return false;
 
       if(star!=m-1)
         idx = hasSubstring(s,idx,n-1,p,star+1,m-1);
-
-            // cout<<"2-idx\t"<<idx<<endl;
-
 
       if(idx==-1) return false;
       
