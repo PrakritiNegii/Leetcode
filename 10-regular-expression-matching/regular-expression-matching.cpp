@@ -27,8 +27,7 @@ public:
        {
         int notTake = doesMatch(s,i,p,j-2,dp); //matching value before * with nothing
         int take = false;
-        if(p[j-1]=='.') take = doesMatch(s,i-1,p,j,dp)/*one match*/;
-        else if(p[j-1]==s[i]) take = doesMatch(s,i-1,p,j,dp)/*one match*/;
+        if(p[j-1]=='.' || p[j-1]==s[i]) take = doesMatch(s,i-1,p,j,dp)/*one match*/;
 
         return dp[i][j] = notTake | take;
        }
