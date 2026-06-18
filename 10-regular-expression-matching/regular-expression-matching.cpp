@@ -3,35 +3,24 @@ public:
     bool doesMatch(string s, int i, string p, int j, vector<vector<int>>& dp)
      {
       if(i<0 && j<0) return true;
-      if(i<0) 
-       {
-        if(p[j]=='*')
-         {
-          while(j>=0)
-           {
-            if(p[j]!='*') return false;
-            j-=2;
-           }
-         }
-        else return false;
-        return true;
-       }
       if(j<0) return false;
 
-      if(dp[i][j]!=-1) return dp[i][j];
+      if(i>=0 && dp[i][j]!=-1) return dp[i][j];
 
-      if(s[i]==p[j] || p[j]=='.')
+      if(i>=0 && (s[i]==p[j] || p[j]=='.'))
         return dp[i][j] = doesMatch(s,i-1,p,j-1,dp);
 
       if(p[j]=='*') 
        {
         int notTake = doesMatch(s,i,p,j-2,dp); //matching value before * with nothing
         int take = false;
-        if(p[j-1]=='.' || p[j-1]==s[i]) take = doesMatch(s,i-1,p,j,dp)/*one match*/;
+        if(i>=0 && (p[j-1]=='.' || p[j-1]==s[i])) take = doesMatch(s,i-1,p,j,dp)/*one match*/;
 
-        return dp[i][j] = notTake | take;
+        if(i>=0) dp[i][j] = notTake | take;
+        return notTake | take;
        }
-      return dp[i][j] = false;
+      if(i>=0) dp[i][j] = false;
+      return false;
      }
 
     bool isMatch(string s, string p) {
