@@ -14,7 +14,7 @@ public:
        }
       else //bought then we sell
        {
-        take = prices[i] + mProfit(prices,i,false,dp);  
+        take = prices[i] + mProfit(prices,i+1,false,dp);  
         notTake = mProfit(prices,i+1,true,dp);  
        }
       
