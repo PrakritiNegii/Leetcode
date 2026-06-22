@@ -3,28 +3,25 @@ public:
     int maxProfit(vector<int>& prices, int fee) {
         int n = prices.size();
 
-        vector<int> next(2,0), curr(2,0);
+        int nFalse = 0, nTrue = 0;
+        int cFalse = 0, cTrue = 0;
 
         for(int i=n-1; i>=0; i--)
          {
-          for(int bought=0; bought<=1; bought++)
-           {
-            int take=0, notTake=0;
-            if(!bought)
-             {
-              take = -prices[i] + next[true];
-              notTake = next[false];
-             }
-            else
-             {
-              take = prices[i] - fee + next[false];
-              notTake = next[true];
-             }
-            curr[bought] = max(take,notTake);
-           }
-          next = curr;
+          int take=0, notTake=0;
+          //buy
+          take = -prices[i] + nTrue;
+          notTake = nFalse;
+          cFalse = max(take,notTake);
+          //sell
+          take = prices[i] - fee + nFalse;
+          notTake = nTrue;
+          cTrue = max(take,notTake);
+          
+          nFalse = cFalse;
+          nTrue = cTrue;
          }
 
-        return next[false];
+        return nFalse;
     }
 };
