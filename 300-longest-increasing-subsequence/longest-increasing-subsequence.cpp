@@ -3,21 +3,21 @@ public:
     int lengthOfLIS(vector<int>& nums) {
         int n = nums.size();
 
-        vector<vector<int>> dp(n+1,vector<int>(n+1,0));
+        vector<int> dp(n,1);
+        int LIS = 1;
 
-        for(int i=1; i<=n; i++)
+        for(int i=0; i<n; i++)
          {
-          for(int prevIdx=0; prevIdx<=n; prevIdx++)
+          for(int j=0; j<i; j++)
            {
-            int take = 0;
-            if(prevIdx==0 || nums[i-1]<nums[prevIdx-1])
-                take = 1 + dp[i-1][i];
-            int notTake = dp[i-1][prevIdx];
-
-            dp[i][prevIdx] = max(take,notTake);
+            if(nums[j]<nums[i])
+             {
+              dp[i] = max(dp[i],dp[j]+1);
+             }
            }
+          LIS = max(LIS,dp[i]);
          }
 
-        return dp[n][0];
+        return LIS;
     }
 };
