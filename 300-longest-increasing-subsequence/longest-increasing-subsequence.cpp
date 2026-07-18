@@ -2,7 +2,12 @@ class Solution {
 public:
     int lis(vector<int>& nums, int i, int prev, vector<vector<int>>& dp)
      {
-      if(i<0) return 0;
+      if(i==0)
+       {
+        if(prev==nums.size() || nums[i]<nums[prev])
+          return 1;
+        return 0;
+       } 
       if(dp[i][prev]!=-1) return dp[i][prev];
 
       int notTake = lis(nums,i-1,prev,dp);
