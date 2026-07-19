@@ -3,30 +3,21 @@ public:
     int lengthOfLIS(vector<int>& nums) {
         int n = nums.size();
 
-        vector<int> current(n+1,0), previous(n+1,0);
+        vector<int> dp(n,1); //stores the LIS till that index (at any index min possible value of LIS is 1)
+        int maxLIS = 1;
 
-        for(int prev=0; prev<=n; prev++)
+        for(int i=0; i<n; i++)
          {
-          if(prev==n || nums[0]<nums[prev])
-            current[prev] = 1;
-          else
-            current[prev] = 0;
-         }
-        previous = current;
-
-        for(int i=1; i<n; i++)
-         {
-          for(int prev=0; prev<=n; prev++)
+          for(int j=0; j<i; j++)
            {
-            int notTake = previous[prev];
-            int take = 0;
-            if(prev==n || nums[i]<nums[prev])
-                take = 1 + previous[i];
-
-            current[prev] = max(notTake,take);
+            if(nums[j]<nums[i])
+             {
+              dp[i] = max(dp[i],1+dp[j]);
+             }
            }
-          previous = current;
+          maxLIS = max(maxLIS,dp[i]);
          }
-        return previous[n];
+        
+        return maxLIS;
     }
 };
