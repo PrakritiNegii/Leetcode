@@ -13,18 +13,9 @@ public:
             dp.push_back(nums[i]);
           else
            {
-            int left=0, right=dp.size()-1;
-            while(left<=right)
-             {
-              int mid = left + (right-left)/2;
+            int ind = lower_bound(dp.begin(),dp.end(),nums[i]) - dp.begin(); //returns an iterator
 
-              if(nums[i]<=dp[mid]) 
-                right = mid - 1;
-              else 
-                left = mid + 1;
-             }
-
-            dp[left] = nums[i];
+            dp[ind] = nums[i];
            }
          }
         
