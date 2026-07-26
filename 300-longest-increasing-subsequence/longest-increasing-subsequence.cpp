@@ -1,23 +1,33 @@
+//Using Binary Search
 class Solution {
 public:
     int lengthOfLIS(vector<int>& nums) {
         int n = nums.size();
 
-        vector<int> dp(n,1); //stores the LIS till that index (at any index min possible value of LIS is 1)
-        int maxLIS = 1;
+        vector<int> dp; 
+        dp.push_back(nums[0]);
 
-        for(int i=0; i<n; i++)
+        for(int i=1; i<n; i++)
          {
-          for(int j=0; j<i; j++)
+          if(dp.back()<nums[i]) 
+            dp.push_back(nums[i]);
+          else
            {
-            if(nums[j]<nums[i])
+            int left=0, right=dp.size()-1;
+            while(left<=right)
              {
-              dp[i] = max(dp[i],1+dp[j]);
+              int mid = left + (right-left)/2;
+
+              if(nums[i]<=dp[mid]) 
+                right = mid - 1;
+              else 
+                left = mid + 1;
              }
+
+            dp[left] = nums[i];
            }
-          maxLIS = max(maxLIS,dp[i]);
          }
         
-        return maxLIS;
+        return dp.size();
     }
 };
