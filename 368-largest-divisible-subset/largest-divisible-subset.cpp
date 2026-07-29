@@ -1,48 +1,46 @@
 class Solution {
 public:
-    vector<int> largestDivisibleSubset(vector<int>& nums) {
-        int n = nums.size();
+    vector<int> largestDivisibleSubset(vector<int>& nums) 
+     {
+      sort(nums.begin(),nums.end());
+      int n = nums.size();
+      vector<int> lis(n,1); //lis till given index
+      vector<int> hash(n); //stores the previous index of lis
 
-        sort(nums.begin(),nums.end(),greater<int>());
-          
-        vector<int> maxSubset;
-        
-        for(int i=0; i<n; i++)
+      int maxLis = 1;
+      int maxIdx = 0;
+
+      hash[0] = 0;
+      for(int i=1; i<n; i++)
+       {
+        hash[i] = i;
+        for(int j=0; j<i; j++)
          {
-          vector<vector<int>> ss;
-          ss.push_back({nums[i]});
-
-          int maxSize = 1;
-          int maxIdx = 0;
-
-          for(int j=i+1; j<n; j++)
+          if(nums[i]%nums[j]==0)
            {
-            bool newSubset = true;
-
-            for(int k=0; k<ss.size(); k++)
+            if(lis[j]+1 > lis[i])
              {
-              int last = ss[k].back();
-              if(last%nums[j]==0)
-               {
-                ss[k].push_back(nums[j]);
-                int size = ss[k].size();
-                if(size>maxSize)
-                 {
-                  maxSize = size;
-                  maxIdx = k;
-                 }
-                newSubset = false;
-               }
+              lis[i] = lis[j]+1;
+              hash[i] = j;
              }
-
-            if(nums[i]%nums[j]==0)
-                ss.push_back({nums[i],nums[j]});
            }
-
-          if(maxSize>maxSubset.size())
-            maxSubset = ss[maxIdx];
          }
+        if(maxLis<lis[i])
+         {
+          maxLis = lis[i];
+          maxIdx = i;
+         }
+       }
 
-        return maxSubset;
-    }
+      vector<int> subset;
+      int i = maxIdx;
+      while(i!=hash[i])
+       {
+        subset.push_back(nums[i]);
+        i = hash[i];
+       }
+      subset.push_back(nums[i]);
+
+      return subset;
+     }
 };
