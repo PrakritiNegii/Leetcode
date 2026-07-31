@@ -9,29 +9,26 @@ public:
          Use <, not <=
          std::sort requires the comparator to define a strict weak ordering.
 
-That means:
+         That means:
 
-cmp(a, a) must always be false.
-If cmp(a, b) is true, then cmp(b, a) must be false.
-
-
+         cmp(a, a) must always be false.
+         If cmp(a, b) is true, then cmp(b, a) must be false.
          */
 
         int n = words.size();
 
         vector<int> lis(n,1);
-        vector<int> hash(n);
         int maxLis = 1;
-        int maxIdx = 0;
         for(int i=0; i<n; i++)
          {
-          hash[i] = i;
           for(int j=0; j<i; j++)
            {
             if(words[i].size()-1 != words[j].size()) 
               continue;
+
             string a = words[i];
             string b = words[j];
+
             int difference = 0;
             int x=0, y=0;
             while(x<a.size() && difference<=1)
@@ -43,20 +40,13 @@ If cmp(a, b) is true, then cmp(b, a) must be false.
               else y++;
               x++;
              }
+             
             if(difference==1)
              {
-              if(lis[i]<lis[j]+1)
-               {
-                lis[i] = lis[j]+1;
-                hash[i] = j;
-               }
+              lis[i] = max(lis[i],lis[j]+1);
              }
            }
-          if(maxLis<lis[i])
-           {
-            maxLis = lis[i];
-            maxIdx = i;
-           }
+          maxLis = max(maxLis,lis[i]);
          }
 
       return maxLis;
