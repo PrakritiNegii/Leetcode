@@ -1,43 +1,35 @@
 class Solution {
 public:
-    void permutations(vector<int>& nums, int i, int c, unordered_set<int>& visited, vector<int>& arr, vector<vector<int>> &res) {
-      if(c==0) 
+    void permutations(vector<int>& nums, vector<bool>& visited, vector<int> &arr, vector<vector<int>>& res)
+     {
+      if(arr.size()==nums.size())
        {
         res.push_back(arr);
         return;
        }
-    
-      for(int j=1; j<nums.size(); j++)
+
+      for(int i=0; i<nums.size(); i++)
        {
-        int idx = (i+j)%(nums.size());
-        if(visited.count(nums[idx]) == 0)
+        if(visited[i]==0)
          {
-          visited.insert(nums[idx]);
-          arr.push_back(nums[idx]);
+          arr.push_back(nums[i]);
+          visited[i] = 1;
+          
+          permutations(nums,visited,arr,res);
 
-          permutations(nums,idx,c-1,visited,arr,res);
-
-          visited.erase(nums[idx]);
+          visited[i] = 0;
           arr.pop_back();
          }
        }
-    }
-
+     }
     vector<vector<int>> permute(vector<int>& nums) {
-      int n = nums.size();
+        int n = nums.size();
+        vector<vector<int>> res;
 
-      vector<vector<int>> res;
-      for(int i=0; i<n; i++)
-       {
-        unordered_set<int> visited;
-        visited.insert(nums[i]);
-
+        vector<bool> visited(n,0);
         vector<int> arr;
-        arr.push_back(nums[i]);
+        permutations(nums,visited,arr,res);
 
-        permutations(nums,i,n-1,visited,arr,res);
-       }
-
-      return res; 
+        return res;
     }
 };
