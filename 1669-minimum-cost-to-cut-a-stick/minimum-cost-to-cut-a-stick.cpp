@@ -31,7 +31,6 @@ public:
         int cutsSize = cuts.size();
 
         vector<bool> visited(cutsSize,0);
-        // vector<vector<int>> dp(n+1,vector<int>(n+1,-1));
         map<pair<int,int>,int> dp;
         return partition(cuts,0,n,visited,dp);
     }
