@@ -2,8 +2,6 @@ class Solution {
 public:
     int partition(vector<int>& cuts, int i, int j, vector<bool> &visited, map<pair<int,int>,int>& dp)
      {
-      if(i==j-1) return 0;
-
       if(dp.count({i,j})!=0) return dp[{i,j}];
 
       int minCost = INT_MAX;
